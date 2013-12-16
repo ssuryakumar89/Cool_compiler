@@ -63,7 +63,8 @@
      OBJECTID = 279,
      ASSIGN = 280,
      NOT = 281,
-     LE = 282
+     LE = 282,
+     ERROR = 283
    };
 #endif
 /* Tokens.  */
@@ -92,6 +93,7 @@
 #define ASSIGN 280
 #define NOT 281
 #define LE 282
+#define ERROR 283
 
 
 
@@ -101,7 +103,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 107 "cool.y"
+#line 89 "cool.y"
 
       Boolean boolean;
       Symbol symbol;
@@ -116,8 +118,6 @@ typedef union YYSTYPE
       Cases cases;
       Expression expression;
       Expressions expressions;
-      Let_attr_pointer let_attr;
-      Let_attr_list let_attrs;
       char *error_msg;
     
 
