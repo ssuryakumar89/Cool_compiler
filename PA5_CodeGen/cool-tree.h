@@ -178,16 +178,34 @@ public:
    Formals formals;
    Symbol return_type;
    Expression expr;
+   int offset;
+   int num_max_locals;
+   int num_temporary_offset;
 public:
    method_class(Symbol a1, Formals a2, Symbol a3, Expression a4) {
       name = a1;
       formals = a2;
       return_type = a3;
       expr = a4;
+      offset = 0;
+      num_temporary_offset = 0;
    }
+
    Feature copy_Feature();
    void dump(ostream& stream, int n);
-
+   Formals get_formals() { return formals; }
+   int get_num_params();
+   void set_offset(int offset_) { offset = offset_; }
+   int get_offset() { return offset; }
+   int get_num_max_locals() { return num_max_locals; }
+   int count_num_max_locals();
+   int get_new_temporary_offset() {
+      num_temporary_offset++;
+      return -1 * num_temporary_offset;
+   }
+   int get_num_temporary_offset_used() {
+      return num_temporary_offset;
+   }
 #ifdef Feature_SHARED_EXTRAS
    Feature_SHARED_EXTRAS
 #endif
@@ -203,6 +221,7 @@ public:
    Symbol name;
    Symbol type_decl;
    Expression init;
+   int offset;
 public:
    attr_class(Symbol a1, Symbol a2, Expression a3) {
       name = a1;
@@ -211,7 +230,8 @@ public:
    }
    Feature copy_Feature();
    void dump(ostream& stream, int n);
-
+   void set_offset(int offset_) { offset = offset_; };
+   int get_offset() { return offset; }
 #ifdef Feature_SHARED_EXTRAS
    Feature_SHARED_EXTRAS
 #endif
@@ -231,6 +251,7 @@ public:
       name = a1;
       type_decl = a2;
    }
+   Symbol get_name() { return name; }
    Formal copy_Formal();
    void dump(ostream& stream, int n);
 
@@ -279,7 +300,7 @@ public:
    }
    Expression copy_Expression();
    void dump(ostream& stream, int n);
-
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -305,7 +326,7 @@ public:
    }
    Expression copy_Expression();
    void dump(ostream& stream, int n);
-
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -330,6 +351,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -354,6 +376,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -376,6 +399,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -398,6 +422,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -418,6 +443,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -444,6 +470,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -466,6 +493,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -488,6 +516,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -510,6 +539,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -532,6 +562,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -552,6 +583,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -574,6 +606,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -596,6 +629,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -618,6 +652,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -638,6 +673,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -658,6 +694,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -678,6 +715,8 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -698,6 +737,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -718,6 +758,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -738,6 +779,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -756,6 +798,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return true; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -776,6 +819,7 @@ public:
    Expression copy_Expression();
    void dump(ostream& stream, int n);
 
+   bool is_no_expr() { return false; }
 #ifdef Expression_SHARED_EXTRAS
    Expression_SHARED_EXTRAS
 #endif
@@ -834,3 +878,4 @@ Expression object(Symbol);
 
 
 #endif
+

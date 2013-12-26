@@ -17,7 +17,7 @@
 #define MAXINT  100000000    
 #define WORD_SIZE    4
 #define LOG_WORD_SIZE 2     // for logical shifts
-
+#define FIRST_ATTR_OFFSET_IN_OBJ 3
 // Global names
 #define CLASSNAMETAB         "class_nameTab"
 #define CLASSOBJTAB          "class_objTab"
@@ -28,6 +28,7 @@
 
 // Naming conventions
 #define DISPTAB_SUFFIX       "_dispTab"
+#define ATTR_SEP             "_"
 #define METHOD_SEP           "."
 #define CLASSINIT_SUFFIX     "_init"
 #define PROTOBJ_SUFFIX       "_protObj"
@@ -35,7 +36,7 @@
 #define INTCONST_PREFIX      "int_const"
 #define STRCONST_PREFIX      "str_const"
 #define BOOLCONST_PREFIX     "bool_const"
-
+#define OFFSET_SUFFIX        "_attrOffset"
 
 #define EMPTYSLOT            0
 #define LABEL                ":\n"
@@ -104,5 +105,6 @@
 #define BLEQ     "\tble\t"
 #define BLT      "\tblt\t"
 #define BGT      "\tbgt\t"
+
 
 

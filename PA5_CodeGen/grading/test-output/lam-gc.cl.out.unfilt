@@ -1,0 +1,43 @@
+SPIM Version 6.5 of January 4, 2003
+Copyright 1990-2003 by James R. Larus (larus@cs.wisc.edu).
+All Rights Reserved.
+See the file README for a full copyright notice.
+Loaded: /usr/class/cs143/cool/lib/trap.handler
+The following symbols are undefined:
+LambdaListNE.init
+LambdaListRef.removeHead
+LambdaList.headC
+LambdaList.headE
+LambdaList.headN
+LambdaListNE.headC
+LambdaListNE.headE
+LambdaListNE.headN
+LambdaListNE.tail
+LambdaList.isNil
+LambdaListNE.isNil
+LambdaListRef.reset
+LambdaList.tail
+LambdaListRef.headC
+LambdaListRef.headE
+LambdaListRef.headN
+LambdaList.add
+LambdaListRef.add
+LambdaListRef.isNil
+
+\x.x
+\x.\y.x
+\x.\y.\z.((((x)@(z)))@(((y)@(z))))
+beta-reduce: ((((((\x.\y.\z.((((x)@(z)))@(((y)@(z)))))@(\x.\y.x)))@(\x.x)))@(\x.x)) =>
+((((\y.\z.((((\x.\y.x)@(z)))@(((y)@(z)))))@(\x.x)))@(\x.x)) =>
+((\z.((((\x.\y.x)@(z)))@(((\x.x)@(z)))))@(\x.x)) =>
+((((\x.\y.x)@(\x.x)))@(((\x.x)@(\x.x)))) =>
+((\y.\x.x)@(((\x.x)@(\x.x)))) =>
+\x.x
+beta-reduce: ((((\x.\y.x)@(\x.x)))@(\x.x)) =>
+((\y.\x.x)@(\x.x)) =>
+\x.x
+Exception occurred at PC=0x00000000
+  Bad address in text read: 0x00000000
+  Exception 6  [Bad address in text read]  Execution aborted
+Stats -- #instructions : 25153
+         #reads : 5636  #writes 3883  #branches 4387  #other 11247
